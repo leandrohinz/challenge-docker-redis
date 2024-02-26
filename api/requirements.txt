@@ -1,2 +1,4 @@
-redis==2.10.6
+redis
+flask
+jsonify
 requests
