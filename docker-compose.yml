@@ -1,0 +1,21 @@
+version: "3"
+services:
+  api:
+    build: ./api
+    environment:
+      PORT: 8080
+    ports:
+      - 8080:8080
+    networks:
+        - vnet1
+    depends_on:
+      - redis
+  redis-db:
+    image: redis
+    ports: 
+      - 6379:6379
+    networks:
+      - vnet1
+networks:
+  vnet1:
+    driver: bridge 
