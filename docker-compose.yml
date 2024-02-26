@@ -3,9 +3,9 @@ services:
   api:
     build: ./api
     environment:
-      PORT: 8080
+      PORT: 5000
     ports:
-      - 8080:8080
+      - 5000:5000
     networks:
         - vnet1
     depends_on:
