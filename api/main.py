@@ -1,14 +1,10 @@
 from flask import Flask, request, jsonify
 from flask_basicauth import BasicAuth
+from prometheus_client import Counter, generate_latest, Summary
 import redis
 
 app = Flask(__name__)
-redis_db = redis.StrictRedis(host='127.0.0.1', port=6379, db=0)
-
-
-
-app = Flask(__name__)
-redis_client = redis.Redis(host='localhost', port=6379, db=0)
+redis_db = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 # Configurar las credenciales para la autenticación básica
 app.config['BASIC_AUTH_USERNAME'] = 'username'
@@ -18,17 +14,28 @@ app.config['BASIC_AUTH_PASSWORD'] = 'password'
 basic_auth = BasicAuth(app)
 
 # Función de autenticación para verificar las credenciales
-@basic_auth.verify_password
-def verify_password(username, password):
+@basic_auth.check_credentials
+def check_credentials(username, password):
     # Verificar las credenciales del usuario
-    if username == app.config['BASIC_AUTH_USERNAME'] and password == app.config['BASIC_AUTH_PASSWORD']:
-        return True
-    return False
+    return username == app.config['BASIC_AUTH_USERNAME'] and password == app.config['BASIC_AUTH_PASSWORD']
 
+REQUEST_COUNT = Counter('request_count', 'App Request Count', ['method', 'endpoint'])
+REQUEST_LATENCY = Summary('request_latency_seconds', 'Request latency in seconds')
+
+@app.route('/example', methods=['GET', 'POST'])
+@REQUEST_LATENCY.time()
+def example():
+    REQUEST_COUNT.labels(request.method, request.path).inc()
+    # Your endpoint logic here
+    return "Example endpoint"
+
+@app.route('/metrics')
+def metrics():
+    return generate_latest()
 @app.route('/api/queue/pop', methods=['POST'])
 @basic_auth.required
 def pop_message():
-    message = redis_client.lpop('message_queue')
+    message = redis_db.lpop('message_queue')
     if message:
         return jsonify({'status': 'ok', 'message': message.decode('utf-8')}), 200
     else:
@@ -38,13 +45,13 @@ def pop_message():
 @basic_auth.required
 def push_message():
     message = request.data.decode('utf-8')
-    redis_client.rpush('message_queue', message)
+    redis_db.rpush('message_queue', message)
     return jsonify({'status': 'ok'}), 200
 
 @app.route('/api/queue/count', methods=['GET'])
 @basic_auth.required
 def get_queue_count():
-    count = redis_client.llen('message_queue')
+    count = redis_db.llen('message_queue')
     return jsonify({'status': 'ok', 'count': count}), 200
 
 # Endpoint to get data from Redis
@@ -68,6 +75,15 @@ def add_data():
                       'status': 'OK!' })
     else:
         return jsonify({'error': 'Invalid key or value provided!'}), 400
+    
+@app.route('/health')
+def health_check():
+    try:
+        # Check if Redis is reachable
+        redis_db.ping()
+        return jsonify({'status': 'Redis is up'})
+    except redis.exceptions.ConnectionError:
+        return jsonify({'status': 'Redis is down'}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
