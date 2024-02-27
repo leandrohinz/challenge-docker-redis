@@ -4,3 +4,4 @@ jsonify
 requests
 flask_basicauth
 prometheus_client
+pytest
