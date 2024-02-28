@@ -98,18 +98,22 @@ sudo apt install prometheus
 **************************************
 API TEST
 
-POSTMAN TEST
+BATCH TEST
 You can test the API endpoints using tools like cURL or Postman. For example:
 
-To push a message: curl -X POST -d "Message1" http://localhost:5000/api/queue/push
-To pop a message: curl -X POST http://localhost:5000/api/queue/pop
-To get the count of messages: curl http://localhost:5000/api/queue/count
-To get the metrics: curl http://localhost:5000/metrics
-To get the logs: curl http://localhost:5000/logs
+To push a message: curl -X POST -H "Authorization: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY" -d "Message1" http://localhost:5000/api/queue/push
+To pop a message: curl -X POST -H "Authorization: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY" http://localhost:5000/api/queue/pop
+To get the count of messages: curl -H "Authorization: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY" http://localhost:5000/api/queue/count
+To get the metrics: curl -H "Authorization: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY" http://localhost:5000/metrics
+To get the logs: curl -H "Authorization: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY" http://localhost:5000/logs
 
-Dont forget to add the header Key: Content-Type, Value: application/json and Key: Authorization, Value: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY to get the correct response from the API in postman.
+IN POSTMAN:
+
+You can add for example a GET request that points to localhost:5000/api/queue/count
+
+!!!Dont forget to add the header Key: Content-Type, Value: application/json and Key: Authorization, Value: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY to get the correct response from the API in postman!!
 
 PYTEST:
-To run the endpoint api tests you can run the file test_api.py located in the folder tests with this command: pytest
+To run the endpoint api tests you can run the file test_api.py located in the folder tests with this command: pytest, and look for the pass test output.
 
 ****************************************

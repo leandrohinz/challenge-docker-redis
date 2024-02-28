@@ -1,4 +1,3 @@
-import os
 from functools import wraps
 import logging
 from flask import Flask, Response, request, jsonify
@@ -9,7 +8,7 @@ app = Flask(__name__)
 redis_db = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 # Configure logging
-logging.basicConfig(filename='app.log', level=logging.INFO)
+logging.basicConfig(filename='../api/app.log', level=logging.INFO)
 
 # Define authentication tokens
 AUTH_TOKENS = 'fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY'
@@ -72,9 +71,6 @@ def get_queue_count():
     logging.info('Queue count retrieved: %s', count)
     return jsonify({'status': 'ok', 'count': count}), 200
 
-# Get the current user's home directory
-home_dir = os.path.expanduser("~")
-
 # Endpoint to show logging info
 @app.route('/log_file')
 @authenticate
@@ -83,14 +79,8 @@ def view_log_file():
     REQUEST_COUNT.labels(request.method, request.path).inc()
     logging.info('Queue count retrieved: %s', 'log_file_requested')
     
-     # Get the current user's name or ID
-    user_name = os.getlogin()  # Assuming the username is used for log file differentiation
-    
     # Define the path to the log file
-    log_file_path = os.path.join(home_dir, f'{user_name}', app.log)
-
-    # Define the path to the log file
-    #log_file_path = '/home/leandroid/app.log'
+    log_file_path = '../api/app.log'
 
     # Read the content of the log file
     with open(log_file_path, 'r') as file:

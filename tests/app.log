@@ -106,3 +106,29 @@ WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 820-319-424
 INFO:root:Queue count retrieved: log_file_requested
 INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:57:47] "[35m[1mGET /log_file HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 820-319-424
+INFO:root:Data retrieved for key 4: juan
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 14:17:50] "GET /get/4 HTTP/1.1" 200 -
+INFO:root:Queue count retrieved: 3
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 14:17:59] "GET /api/queue/count HTTP/1.1" 200 -
+INFO:root:Queue count retrieved: 3
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 14:19:51] "GET /api/queue/count HTTP/1.1" 200 -
+INFO:root:Message popped: test_message
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 14:25:19] "POST /api/queue/pop HTTP/1.1" 200 -
+INFO:root:Message pushed: test_value
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 14:25:19] "POST /api/queue/push HTTP/1.1" 200 -
+INFO:root:Queue count retrieved: 3
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 14:25:19] "GET /api/queue/count HTTP/1.1" 200 -
+INFO:root:Message pushed: 
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 14:27:30] "POST /api/queue/push HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 14:27:48] "[31m[1mGET /api/queue/count HTTP/1.1[0m" 401 -
+INFO:root:Queue count retrieved: 1
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 14:28:24] "GET /api/queue/count HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/home/leandroid/challenge-docker-redis/api/main.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
