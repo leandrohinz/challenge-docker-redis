@@ -44,7 +44,7 @@ def test_pop_message():
 # Test for push endpoint
 def test_push_message():
     # Make a POST request to push endpoint
-    response = requests.post(f'{BASE_URL}/api/queue/push', data=json.dumps({'value': 'test_value'}), headers={'Content-Type': 'application/json'})
+    response = requests.post(f'{BASE_URL}/api/queue/push', data='test_value', headers={'Content-Type': 'application/json'})
 
     # Check response status code
     assert response.status_code == 200
