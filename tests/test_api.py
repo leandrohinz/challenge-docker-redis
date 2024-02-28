@@ -10,6 +10,8 @@ BASE_URL = 'http://localhost:5000'
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
 REDIS_DB = 0
+# Define authentication tokens
+TEST_AUTH_TOKEN = 'fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY'
 
 # Initialize Redis connection
 redis_db = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
@@ -31,7 +33,7 @@ def test_pop_message():
     redis_db.rpush('message_queue', 'test_message')
 
     # Make a POST request to pop endpoint
-    response = requests.post(f'{BASE_URL}/api/queue/pop')
+    response = requests.post(f'{BASE_URL}/api/queue/pop', headers={'Content-Type': 'application/json', 'Authorization': TEST_AUTH_TOKEN})
 
     # Check response status code
     assert response.status_code == 200
@@ -44,7 +46,7 @@ def test_pop_message():
 # Test for push endpoint
 def test_push_message():
     # Make a POST request to push endpoint
-    response = requests.post(f'{BASE_URL}/api/queue/push', data='test_value', headers={'Content-Type': 'application/json'})
+    response = requests.post(f'{BASE_URL}/api/queue/push', data='test_value', headers={'Content-Type': 'application/json', 'Authorization': TEST_AUTH_TOKEN})
 
     # Check response status code
     assert response.status_code == 200
@@ -59,7 +61,7 @@ def test_get_queue_count():
     redis_db.rpush('message_queue', 'message1', 'message2', 'message3')
 
     # Make a GET request to count endpoint
-    response = requests.get(f'{BASE_URL}/api/queue/count')
+    response = requests.get(f'{BASE_URL}/api/queue/count', headers={'Content-Type': 'application/json', 'Authorization': TEST_AUTH_TOKEN})
 
     # Check response status code
     assert response.status_code == 200
