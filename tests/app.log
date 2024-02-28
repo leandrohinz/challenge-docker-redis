@@ -12,3 +12,97 @@ INFO:werkzeug:127.0.0.1 - - [27/Feb/2024 22:48:34] "POST /api/queue/push HTTP/1.
 INFO:root:Queue count retrieved: 3
 INFO:werkzeug:127.0.0.1 - - [27/Feb/2024 22:48:34] "GET /api/queue/count HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [27/Feb/2024 22:48:40] "[33mGET / HTTP/1.1[0m" 404 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 820-319-424
+INFO:root:Message popped: test_message
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 11:50:40] "POST /api/queue/pop HTTP/1.1" 200 -
+INFO:root:Message pushed: test_value
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 11:50:40] "POST /api/queue/push HTTP/1.1" 200 -
+INFO:root:Queue count retrieved: 3
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 11:50:40] "GET /api/queue/count HTTP/1.1" 200 -
+INFO:root:Queue count retrieved: log_file_requested
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:06:49] "GET /log_file HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:07:02] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/home/leandroid/challenge-docker-redis/api/main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 820-319-424
+INFO:werkzeug: * Detected change in '/home/leandroid/challenge-docker-redis/api/main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 820-319-424
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 820-319-424
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:19:33] "[33mGET / HTTP/1.1[0m" 404 -
+INFO:root:Data retrieved for key 2: jose
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:19:38] "GET /get/2 HTTP/1.1" 200 -
+INFO:root:Data retrieved for key 3: david
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:19:40] "GET /get/3 HTTP/1.1" 200 -
+INFO:root:Data retrieved for key 4: juan
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:19:43] "GET /get/4 HTTP/1.1" 200 -
+WARNING:root:Data not found for key 5
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:19:46] "[33mGET /get/5 HTTP/1.1[0m" 404 -
+INFO:root:Data retrieved for key 4: juan
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:19:49] "GET /get/4 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:20:02] "[31m[1mGET /log_file HTTP/1.1[0m" 401 -
+INFO:root:Queue count retrieved: log_file_requested
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:20:36] "[35m[1mGET /log_file HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 820-319-424
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:51:56] "[33mGET / HTTP/1.1[0m" 404 -
+INFO:root:Data retrieved for key 1: leandro
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:52:02] "GET /get/1 HTTP/1.1" 200 -
+INFO:root:Data retrieved for key 4: juan
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:52:05] "GET /get/4 HTTP/1.1" 200 -
+INFO:root:Queue count retrieved: log_file_requested
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:52:14] "[35m[1mGET /log_file HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/leandroid/challenge-docker-redis/api/main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 820-319-424
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 820-319-424
+INFO:root:Queue count retrieved: 0
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:54:14] "GET /api/queue/count HTTP/1.1" 200 -
+INFO:root:Message pushed: "Message Pushed1!"
+
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:54:22] "POST /api/queue/push HTTP/1.1" 200 -
+INFO:root:Message pushed: "Message Pushed2!"
+
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:54:26] "POST /api/queue/push HTTP/1.1" 200 -
+INFO:root:Message pushed: "Message Pushed3!"
+
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:54:29] "POST /api/queue/push HTTP/1.1" 200 -
+INFO:root:Queue count retrieved: 3
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:54:33] "GET /api/queue/count HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:54:38] "GET /metrics HTTP/1.1" 200 -
+INFO:root:Queue count retrieved: log_file_requested
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:54:42] "[35m[1mGET /log_file HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/leandroid/challenge-docker-redis/api/main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 820-319-424
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 820-319-424
+INFO:root:Queue count retrieved: log_file_requested
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 12:57:47] "[35m[1mGET /log_file HTTP/1.1[0m" 500 -

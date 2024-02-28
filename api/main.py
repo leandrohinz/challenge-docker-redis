@@ -1,3 +1,4 @@
+import os
 from functools import wraps
 import logging
 from flask import Flask, Response, request, jsonify
@@ -28,7 +29,7 @@ def authenticate(func):
             return jsonify({'error': 'Unauthorized access!'}), 401
     return wrapper
 
-# Endpoint to metrics from pop,push and count endpoint
+# Endpoint to collect metrics from pop, push and count endpoint
 @app.route('/metrics')
 def metrics():
     registry = CollectorRegistry()
@@ -71,15 +72,25 @@ def get_queue_count():
     logging.info('Queue count retrieved: %s', count)
     return jsonify({'status': 'ok', 'count': count}), 200
 
-# Endpoint to show loggin info
+# Get the current user's home directory
+home_dir = os.path.expanduser("~")
+
+# Endpoint to show logging info
 @app.route('/log_file')
 @authenticate
 @REQUEST_LATENCY.time()
 def view_log_file():
     REQUEST_COUNT.labels(request.method, request.path).inc()
     logging.info('Queue count retrieved: %s', 'log_file_requested')
+    
+     # Get the current user's name or ID
+    user_name = os.getlogin()  # Assuming the username is used for log file differentiation
+    
     # Define the path to the log file
-    log_file_path = '/home/leandroid/app.log'
+    log_file_path = os.path.join(home_dir, f'{user_name}', app.log)
+
+    # Define the path to the log file
+    #log_file_path = '/home/leandroid/app.log'
 
     # Read the content of the log file
     with open(log_file_path, 'r') as file:
