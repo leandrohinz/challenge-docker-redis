@@ -113,6 +113,8 @@ You can add for example a GET request that points to localhost:5000/api/queue/co
 
 !!!Dont forget to add the header Key: Content-Type, Value: application/json and Key: Authorization, Value: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY to get the correct response from the API in postman!!
 
+**************************************
+
 PYTEST:
 To run the endpoint api tests you can run the file test_api.py located in the folder tests with this command: pytest, and look for the pass test output.
 
