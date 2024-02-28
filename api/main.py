@@ -1,6 +1,6 @@
+from functools import wraps
 import logging
 from flask import Flask, Response, request, jsonify
-#from flask_basicauth import BasicAuth
 from prometheus_client import Counter, generate_latest, Summary, REGISTRY, CollectorRegistry, CONTENT_TYPE_LATEST
 import redis
 
@@ -10,21 +10,23 @@ redis_db = redis.StrictRedis(host='localhost', port=6379, db=0)
 # Configure logging
 logging.basicConfig(filename='app.log', level=logging.INFO)
 
-# Configurar las credenciales para la autenticación básica
-#app.config['BASIC_AUTH_USERNAME'] = 'username'
-#app.config['BASIC_AUTH_PASSWORD'] = 'password'
-
-# Inicializar la extensión de autenticación básica
-#basic_auth = BasicAuth(app)
-
-# Función de autenticación para verificar las credenciales
-#@basic_auth.check_credentials
-# def check_credentials(username, password):
-#     # Verificar las credenciales del usuario
-#     return username == app.config['BASIC_AUTH_USERNAME'] and password == app.config['BASIC_AUTH_PASSWORD']
+# Define authentication tokens
+AUTH_TOKENS = 'fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY'
 
 REQUEST_COUNT = Counter('request_count', 'App Request Count', ['method', 'endpoint'])
 REQUEST_LATENCY = Summary('request_latency_seconds', 'Request latency in seconds')
+
+# Middleware for authentication
+def authenticate(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        auth_header = request.headers.get('Authorization')
+        #Add here the desired validators        
+        if auth_header == AUTH_TOKENS:
+            return func(*args, **kwargs)
+        else:
+            return jsonify({'error': 'Unauthorized access!'}), 401
+    return wrapper
 
 # Endpoint to metrics from pop,push and count endpoint
 @app.route('/metrics')
@@ -36,8 +38,8 @@ def metrics():
 
 # Endpoint to pop data from Redis
 @app.route('/api/queue/pop', methods=['POST'])
+@authenticate
 @REQUEST_LATENCY.time()
-#@basic_auth.required
 def pop_message():
     REQUEST_COUNT.labels(request.method, request.path).inc()
     message = redis_db.lpop('message_queue')
@@ -50,8 +52,8 @@ def pop_message():
 
 # Endpoint to push data to Redis
 @app.route('/api/queue/push', methods=['POST'])
+@authenticate
 @REQUEST_LATENCY.time()
-#@basic_auth.required
 def push_message():
     REQUEST_COUNT.labels(request.method, request.path).inc()
     message = request.data.decode('utf-8')
@@ -61,13 +63,30 @@ def push_message():
 
 # Endpoint to count data from Redis
 @app.route('/api/queue/count', methods=['GET'])
+@authenticate
 @REQUEST_LATENCY.time()
-#@basic_auth.required
 def get_queue_count():
     REQUEST_COUNT.labels(request.method, request.path).inc()
     count = redis_db.llen('message_queue')
     logging.info('Queue count retrieved: %s', count)
     return jsonify({'status': 'ok', 'count': count}), 200
+
+# Endpoint to show loggin info
+@app.route('/log_file')
+@authenticate
+@REQUEST_LATENCY.time()
+def view_log_file():
+    REQUEST_COUNT.labels(request.method, request.path).inc()
+    logging.info('Queue count retrieved: %s', 'log_file_requested')
+    # Define the path to the log file
+    log_file_path = '/home/leandroid/app.log'
+
+    # Read the content of the log file
+    with open(log_file_path, 'r') as file:
+        log_content = file.read()
+
+    # Return the log content as plain text
+    return log_content, 200, {'Content-Type': 'text/plain'}
 
 # Endpoint to get data from Redis
 @app.route('/get/<key>', methods=['GET'])
@@ -108,46 +127,3 @@ def health_check():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-# Endpoint to POP data in Redis
-# @app.route('/api/queue/pop', methods=['POST'])
-# def pop_data():
-#     data = request.get_json()
-#     key = data.get('key')
-#     value = data.get('value')
-#     if key and value:
-#         redis_db.set(key, value)
-#         return jsonify({'message': 'Data added successfully!',
-#                       'status': 'OK!' })
-#     else:
-#         return jsonify({'error': 'Invalid key or value provided!'}), 200
-    
-#  # Endpoint to PUSH data in Redis
-# @app.route('/api/queue/push', methods=['POST'])
-# def push_data():
-#     data = request.get_json()
-#     key = data.get('key')
-#     value = data.get('value')
-#     if key and value:
-#         redis_db.set(key, value)
-#         return jsonify({'message': 'Data added successfully!',
-#                       'status': 'OK!' })
-#     else:
-#         return jsonify({'error': 'Invalid key or value provided!'}), 200   
-    
-#  # Endpoint to COUNT data in Redis
-# @app.route('/api/queue/count', methods=['GET'])
-# def count_data():
-#     data = request.get_json()
-#     key = data.get('key')
-#     value = data.get('value')
-#     if key and value:
-#         redis_db.get(key, value)
-#         return jsonify({'count': 'Data count obtained successfully!',
-#                       'status': 'OK!' })
-#     else:
-#         return jsonify({'error': 'Invalid key or value provided!'}), 200   
-
-
-
-
