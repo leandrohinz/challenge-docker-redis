@@ -1,13 +1,20 @@
-FROM python:3.6-alpine
+# Use Python base image
+FROM python:3.9
 
+# Set the working directory in the container
 WORKDIR /app
 
-RUN apk add --no-cache build-base
-
+# Copy the dependencies file to the working directory
 COPY requirements.txt .
 
-RUN pip3 install -r requirements.txt
+# Install dependencies
+RUN pip install -r requirements.txt
 
-COPY main.py .
+# Copy the content of the local src directory to the working directory
+COPY . .
 
-CMD ["python3","-u","main.py"]
+# Expose the port Flask is running on
+EXPOSE 5000
+
+# Command to run the Flask application
+CMD ["python", "app.py"]
