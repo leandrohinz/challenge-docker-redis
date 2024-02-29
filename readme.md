@@ -2,6 +2,14 @@ Challenge - Docker + Redis + API
 LEANDRO HINESTROZA - HALO
 
 *******************************
+
+In the root folder you'll find the docker compose file, to execute it just simply run:
+
+docker-compose up --build
+
+This file calls out the multistaging dockerfile to run the flask app and the redis server.
+
+*******************************
 In the folder api you'll find:
 
 - The dockerfile with the different steps of the base image used, the install of the dependencies, the ports and the flask app run commands.
@@ -122,8 +130,3 @@ You can test the API endpoints using tools like cURL or Postman. For example:
 PYTEST:
 To run the endpoint api tests you can run the file test_api.py located in the folder tests with this command: pytest, and look for the pass test output.
 
-****************************************
-
-In the root folder you'll find the docker compose file, to execute it just simply run:
-
-docker-compose up --build
