@@ -72,6 +72,8 @@ Redis Interaction:
 
 count = redis_db.llen('message_queue'): This line retrieves the length of the Redis list named 'message_queue', which effectively gives the count of items in the queue. It assumes that redis_db is an instance of a Redis client, allowing interaction with a Redis database.
 
+- In Both endpoints batch_pop and batch_push allow us to pop and push multiple messages in batches. We can specify the number of messages to pop in the case of batch pop, and provide a list of messages to push in the case of batch push. 
+
 - The endpoint to show logging info from a file: Is designed to handle a GET request to view the content of a log file (app.log)
 
 
@@ -101,17 +103,19 @@ API TEST
 BATCH TEST
 You can test the API endpoints using tools like cURL or Postman. For example:
 
-To push a message: curl -X POST -H "Authorization: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY" -d "Message1" http://localhost:5000/api/queue/push
-To pop a message: curl -X POST -H "Authorization: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY" http://localhost:5000/api/queue/pop
-To get the count of messages: curl -H "Authorization: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY" http://localhost:5000/api/queue/count
-To get the metrics: curl -H "Authorization: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY" http://localhost:5000/metrics
-To get the logs: curl -H "Authorization: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY" http://localhost:5000/logs
+*To push a message: curl -X POST -H "Authorization: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY" -d "Message1" http://localhost:5000/api/queue/push
 
-IN POSTMAN:
+*To pop a message: curl -X POST -H "Authorization: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY" http://localhost:5000/api/queue/pop
 
-You can add for example a GET request that points to localhost:5000/api/queue/count
+*To get the count of messages: curl -H "Authorization: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY" http://localhost:5000/api/queue/count
 
-!!!Dont forget to add the header Key: Content-Type, Value: application/json and Key: Authorization, Value: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY to get the correct response from the API in postman!!
+*To do a batch pop: curl -X POST -H "Content-Type: application/json" -H "Authorization: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY" -d '{"num_messages": 2}' http://localhost:5000/api/queue/batch_pop
+
+*To do a batch push: curl -X POST -H "Content-Type: application/json" -H "Authorization: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY" -d '{"messages": ["message1", "message2", "message3"]}' http://localhost:5000/api/queue/batch_push
+
+*To get the metrics: curl -H "Authorization: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY" http://localhost:5000/metrics
+
+*To get the logs: curl -H "Authorization: fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY" http://localhost:5000/logs
 
 **************************************
 

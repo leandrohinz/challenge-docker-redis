@@ -89,6 +89,37 @@ def view_log_file():
     # Return the log content as plain text
     return log_content, 200, {'Content-Type': 'text/plain'}
 
+# Endpoint to batch pop data from Redis
+@app.route('/api/queue/batch_pop', methods=['POST'])
+@authenticate
+@REQUEST_LATENCY.time()
+def batch_pop_messages():
+    REQUEST_COUNT.labels(request.method, request.path).inc()
+    num_messages = request.json.get('num_messages', 1)
+    messages = []
+    for _ in range(num_messages):
+        message = redis_db.lpop('message_queue')
+        if message:
+            messages.append(message.decode('utf-8'))
+            logging.info('Message popped: %s', message.decode('utf-8'))
+        else:
+            logging.warning('No message found in the queue')
+            break
+    return jsonify({'status': 'ok', 'messages': messages}), 200
+
+# Endpoint to batch push data to Redis
+@app.route('/api/queue/batch_push', methods=['POST'])
+@authenticate
+@REQUEST_LATENCY.time()
+def batch_push_messages():
+    REQUEST_COUNT.labels(request.method, request.path).inc()
+    messages = request.json.get('messages', [])
+    for message in messages:
+        redis_db.rpush('message_queue', message)
+        logging.info('Message pushed: %s', message)
+    return jsonify({'status': 'ok'}), 200
+
+
 # Endpoint to get data from Redis
 @app.route('/get/<key>', methods=['GET'])
 def get_data(key):
