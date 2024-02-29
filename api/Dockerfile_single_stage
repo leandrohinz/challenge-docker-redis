@@ -1,23 +1,13 @@
-# ---- Build Stage ----
-FROM python:3.9-slim AS builder
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the requirements file into the container
 COPY ./requirements.txt /app
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
-
-# ---- Run Stage ----
-FROM python:3.9-slim AS runner
-
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy the installed packages from the builder stage
-COPY --from=builder /usr/local /usr/local
 
 # Copy the current directory contents into the container at /app
 COPY . .
