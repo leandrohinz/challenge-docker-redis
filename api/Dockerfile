@@ -25,5 +25,5 @@ COPY . .
 # Define environment variable
 ENV FLASK_APP=main.py
 
-# Run app.py when the container launches
+# Run main.py when the container launches
 CMD ["flask", "run", "--host","0.0.0.0"]
