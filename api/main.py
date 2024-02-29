@@ -5,10 +5,10 @@ from prometheus_client import Counter, generate_latest, Summary, REGISTRY, Colle
 import redis
 
 app = Flask(__name__)
-redis_db = redis.StrictRedis(host='localhost', port=6379, db=0)
+redis_db = redis.StrictRedis(host='redis', port=6379, db=0)
 
 # Configure logging
-logging.basicConfig(filename='../api/app.log', level=logging.INFO)
+logging.basicConfig(filename='./app.log', level=logging.INFO)
 
 # Define authentication tokens
 AUTH_TOKENS = 'fo3cZ9EooJlwH7ubQ0I3CttqxE0SrzduMqbug0kfdKdoi0pUe5duwvwZ9R98oMvY'
@@ -80,7 +80,7 @@ def view_log_file():
     logging.info('Queue count retrieved: %s', 'log_file_requested')
     
     # Define the path to the log file
-    log_file_path = '../api/app.log'
+    log_file_path = './app.log'
 
     # Read the content of the log file
     with open(log_file_path, 'r') as file:

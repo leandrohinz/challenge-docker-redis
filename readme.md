@@ -119,3 +119,7 @@ PYTEST:
 To run the endpoint api tests you can run the file test_api.py located in the folder tests with this command: pytest, and look for the pass test output.
 
 ****************************************
+
+In the root folder you'll find the docker compose file, to execute it just simply run:
+
+docker-compose up --build

@@ -92,3 +92,89 @@ WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 820-319-424
 INFO:root:Queue count retrieved: log_file_requested
 INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 14:47:35] "GET /log_file HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 820-319-424
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 15:19:19] "[33mGET / HTTP/1.1[0m" 404 -
+WARNING:root:Data not found for key 1
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 15:19:24] "[33mGET /get/1 HTTP/1.1[0m" 404 -
+WARNING:root:Data not found for key 2
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 15:19:27] "[33mGET /get/2 HTTP/1.1[0m" 404 -
+WARNING:root:Data not found for key 3
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 15:19:31] "[33mGET /get/3 HTTP/1.1[0m" 404 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 820-319-424
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 15:25:03] "[33mGET / HTTP/1.1[0m" 404 -
+INFO:root:Data retrieved for key 1: leandro
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 15:25:08] "GET /get/1 HTTP/1.1" 200 -
+INFO:root:Data retrieved for key 2: jose
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 15:25:12] "GET /get/2 HTTP/1.1" 200 -
+INFO:root:Data retrieved for key 3: david
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 15:25:15] "GET /get/3 HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 820-319-424
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:15:45] "[33mGET / HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:15:52] "[35m[1mGET /get/1 HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:15:52] "[36mGET /get/1?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:15:52] "[36mGET /get/1?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:15:52] "[36mGET /get/1?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:root:Data retrieved for key 1: leandro
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:16:22] "GET /get/1 HTTP/1.1" 200 -
+INFO:root:Data retrieved for key 2: jose
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:16:25] "GET /get/2 HTTP/1.1" 200 -
+INFO:root:Data retrieved for key 3: david
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:16:29] "GET /get/3 HTTP/1.1" 200 -
+INFO:root:Queue count retrieved: 4
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:16:41] "GET /api/queue/count HTTP/1.1" 200 -
+WARNING:root:No message found in the queue
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:16:48] "POST /api/queue/pop HTTP/1.1" 200 -
+INFO:root:Queue count retrieved: 3
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:16:54] "GET /api/queue/count HTTP/1.1" 200 -
+INFO:root:Message pushed: "Message Pushed7!"
+
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:17:02] "POST /api/queue/push HTTP/1.1" 200 -
+INFO:root:Queue count retrieved: 4
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:17:05] "GET /api/queue/count HTTP/1.1" 200 -
+INFO:root:Queue count retrieved: log_file_requested
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:18:54] "GET /log_file HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 820-319-424
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:46:50] "[33mGET / HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:46:55] "[35m[1mGET /get/1 HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:46:55] "[36mGET /get/1?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:46:55] "[36mGET /get/1?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:46:55] "[36mGET /get/1?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:46:55] "[36mGET /get/1?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:root:Queue count retrieved: log_file_requested
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:47:33] "GET /log_file HTTP/1.1" 200 -
+INFO:root:Queue count retrieved: log_file_requested
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:47:38] "GET /log_file HTTP/1.1" 200 -
+INFO:root:Message pushed: "Message Pushed8!"
+
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:47:53] "POST /api/queue/push HTTP/1.1" 200 -
+INFO:root:Queue count retrieved: 5
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:47:56] "GET /api/queue/count HTTP/1.1" 200 -
+INFO:root:Queue count retrieved: log_file_requested
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 16:48:00] "GET /log_file HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 18:07:19] "[33mGET / HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 18:07:19] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 18:07:31] "[33mGET /get/ HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [28/Feb/2024 18:07:36] "[31m[1mGET /log_file HTTP/1.1[0m" 401 -
